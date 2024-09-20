@@ -1,16 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Header from './components/header';
-import Main from './components/main';
-
-const App = () => {
-  return (
-    <section className="todoapp">
-      <Header />
-      <Main />
-    </section>
-  );
-}
+import App from './components/app';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

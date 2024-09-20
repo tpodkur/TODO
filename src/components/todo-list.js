@@ -1,19 +1,19 @@
 import React from 'react';
 import Task from './task';
 
-const TodoList = () => {
+const TodoList = ({ todos }) => {
+  const listItems = todos.map(todo => {
+    const { id, className, ...taskParams } = todo;
+    return (
+      <li className={ className } key={ id }>
+        <Task { ...taskParams } />
+        {/*{todo.className === 'editing' && <input type='text' className='edit' value='Editing task'/>}*/}
+      </li>);
+  });
+
   return (
-    <ul className="todo-list">
-      <li className="completed">
-        <Task description='Completed task' created='created 17 seconds ago' />
-      </li>
-      <li className="editing">
-        <Task description='Editing task' created='created 5 minutes ago' />
-        {/*<input type="text" className="edit" value="Editing task"/>*/}
-      </li>
-      <li>
-        <Task description='Active task' created='created 5 minutes ago' />
-      </li>
+    <ul className='todo-list'>
+      { listItems }
     </ul>
   );
 };
