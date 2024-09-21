@@ -1,21 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Task from './task';
 
-const TodoList = ({ todos }) => {
-  const listItems = todos.map(todo => {
-    const { id, className, ...taskParams } = todo;
+export default class TodoList extends Component {
+  listItems = this.props.todos.map(item => <Task { ...item } key={ item.id } />)
+
+  render() {
     return (
-      <li className={ className } key={ id }>
-        <Task { ...taskParams } />
-        {/*{todo.className === 'editing' && <input type='text' className='edit' value='Editing task'/>}*/}
-      </li>);
-  });
-
-  return (
-    <ul className='todo-list'>
-      { listItems }
-    </ul>
-  );
-};
-
-export default TodoList;
+      <ul className='todo-list'>
+        { this.listItems }
+      </ul>
+    );
+  }
+}
