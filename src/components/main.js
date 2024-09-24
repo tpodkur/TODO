@@ -2,11 +2,11 @@ import React from 'react';
 import TodoList from './todo-list';
 import Footer from './footer';
 
-const Main = ({ ...props }) => {
+const Main = ({ onTasksFilter, ...props }) => {
   return (
     <section className="main">
       <TodoList { ...props } />
-      <Footer />
+      <Footer onTasksFilter={ onTasksFilter } />
     </section>
   );
 };
