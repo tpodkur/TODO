@@ -24,36 +24,20 @@ export default class App extends Component {
     const dataIndex = this.getTaskIndexById(this.data, id);
     this.data.splice(dataIndex, 1);
 
-    const index = this.getTaskIndexById(this.state.tasks, id);
-    this.setState( ({ tasks }) => ({
-      tasks: [
-        ...tasks.slice(0, index),
-        ...tasks.slice(index + 1)
-      ]
-    }));
+    this.setState(
+      ({ tasks: [ ...this.data ] }),
+      this.onTasksFilter
+    );
   }
 
   onChangeClassname = (id, className) => {
     const dataIndex = this.getTaskIndexById(this.data, id);
     this.data[dataIndex].className = className;
 
-    this.setState(({ tasks }) => {
-      const index = this.getTaskIndexById(this.state.tasks, id);
-      const oldTask = tasks[index];
-      const newTask = { ...oldTask, className };
-
-      return {
-        tasks: [
-          ...tasks.slice(0, index),
-          newTask,
-          ...tasks.slice(index + 1)
-        ]
-      };
-    }, () => {
-      if (this.filterStatus !== ALL) {
-        this.onTasksFilter();
-      }
-    });
+    this.setState(
+      ({ tasks: [ ...this.data ] }),
+      this.onTasksFilter
+    );
   };
 
   addTask = (text) => {
@@ -61,12 +45,7 @@ export default class App extends Component {
     const task = { id, description: text, created: 'created 5 minutes ago' };
 
     this.data.push(task);
-    this.setState(({ tasks }) => ({
-      tasks: [
-        ...tasks,
-        task
-      ]
-    }));
+    this.setState(({ tasks: [ ...this.data ] }));
   };
 
   onTasksFilter = (status = this.filterStatus) => {
@@ -88,6 +67,25 @@ export default class App extends Component {
     });
   };
 
+  onDeleteCompletedTasks = () => {
+    let completedTasks = this.data.reduce((acc, task, i) => {
+      if (task.className === 'completed') {
+        acc.push(task);
+      }
+      return acc;
+    }, []);
+
+    for (let task of completedTasks) {
+      const index = this.data.indexOf(task);
+      this.data.splice(index, 1);
+    }
+
+    this.setState(
+      ({ tasks: [ ...this.data ] }),
+      this.onTasksFilter
+    );
+  }
+
   render() {
     return (
       <section className="todoapp">
@@ -97,6 +95,7 @@ export default class App extends Component {
           onDeleteTask={ this.onDeleteTask }
           onChangeClassname={ this.onChangeClassname }
           onTasksFilter={ this.onTasksFilter }
+          onDeleteCompletedTasks = { this.onDeleteCompletedTasks }
         />
       </section>
     );
