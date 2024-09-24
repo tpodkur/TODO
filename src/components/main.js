@@ -27,7 +27,8 @@ Main.propTypes = {
   onDeleteTask: PropTypes.func,
   onChangeClassname: PropTypes.func,
   onTasksFilter: PropTypes.func,
-  onDeleteCompletedTasks: PropTypes.func
+  onDeleteCompletedTasks: PropTypes.func,
+  onUpdateTask: PropTypes.func
 };
 
 export default Main;

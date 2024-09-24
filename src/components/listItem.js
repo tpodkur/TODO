@@ -16,6 +16,7 @@ ListItem.propTypes = {
   created: PropTypes.instanceOf(Date),
   className: PropTypes.string,
   onDeleteTask: PropTypes.func,
+  onUpdateTask: PropTypes.func,
   onChangeClassname: PropTypes.func
 };
 

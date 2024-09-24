@@ -7,12 +7,14 @@ export default class TodoList extends Component {
   static defaultProps = {
     tasks: [],
     onDeleteTask: () => {},
+    onUpdateTask: () => {},
     onChangeClassname: () => {}
   };
 
   static propTypes = {
     tasks: PropTypes.arrayOf(PropTypes.object),
     onDeleteTask: PropTypes.func,
+    onUpdateTask: PropTypes.func,
     onChangeClassname: PropTypes.func
   };
 
@@ -22,6 +24,7 @@ export default class TodoList extends Component {
         { ...task }
         key={ task.id }
         onDeleteTask={ () => this.props.onDeleteTask(task.id) }
+        onUpdateTask={ this.props.onUpdateTask }
         onChangeClassname={ this.props.onChangeClassname }
       />
     );

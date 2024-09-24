@@ -10,6 +10,7 @@ export default class Task extends Component {
     created: '',
     className: '',
     onDeleteTask: () => {},
+    onUpdateTask: () => {},
     onChangeClassname: () => {}
   };
 
@@ -19,11 +20,31 @@ export default class Task extends Component {
     created: PropTypes.instanceOf(Date),
     className: PropTypes.string,
     onDeleteTask: PropTypes.func,
+    onUpdateTask: PropTypes.func,
     onChangeClassname: PropTypes.func
   };
 
-  toggleClassName = (event) => {
+  state = {
+    inputValue: this.props.description
+  };
+
+  onToggleCompleteCheckbox = (event) => {
     this.props.onChangeClassname(this.props.id, event.target.checked ? 'completed' : '')
+  };
+
+  onEditTask = () => {
+    if (this.props.className === 'completed') return;
+    this.props.onChangeClassname(this.props.id, 'editing');
+  };
+
+  onSubmit = (event) => {
+    event.preventDefault();
+    this.props.onUpdateTask(this.props.id, this.state.inputValue);
+    this.props.onChangeClassname(this.props.id, '');
+  };
+
+  onChange = (event) => {
+    this.setState({ inputValue: event.target.value });
   };
 
   render() {
@@ -33,17 +54,26 @@ export default class Task extends Component {
           <input
             className="toggle"
             type="checkbox"
-            onChange={ this.toggleClassName }
+            onChange={ this.onToggleCompleteCheckbox }
             checked={ this.props.className === 'completed' }
           />
           <label>
             <span className="description">{ this.props.description }</span>
             <span className="created">{ formatDistanceToNow(this.props.created) }</span>
           </label>
-          <button className="icon icon-edit"></button>
+          <button className="icon icon-edit" onClick={ this.onEditTask }></button>
           <button className="icon icon-destroy" onClick={ this.props.onDeleteTask }></button>
         </div>
-        { this.props.className === 'editing' && <input type='text' className='edit' defaultValue='Editing task'/> }
+        { this.props.className === 'editing' &&
+          <form onSubmit={ this.onSubmit }>
+            <input
+              type='text'
+              className='edit'
+              value={ this.state.inputValue }
+              onChange={ this.onChange }
+            />
+          </form>
+        }
       </React.Fragment>
     );
   }

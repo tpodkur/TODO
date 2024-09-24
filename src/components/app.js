@@ -48,6 +48,16 @@ export default class App extends Component {
     this.setState(({ tasks: [ ...this.data ] }));
   };
 
+  onUpdateTask = (id, text) => {
+    const dataIndex = this.getTaskIndexById(this.data, id);
+    this.data[dataIndex].description = text;
+
+    this.setState(
+      ({ tasks: [ ...this.data ] }),
+      this.onTasksFilter
+    );
+  };
+
   onTasksFilter = (status = this.filterStatus) => {
     this.setState(({ tasks }) => {
       let filteredTasks;
@@ -101,6 +111,7 @@ export default class App extends Component {
           tasks={ this.state.tasks }
           activeTasksCount={ activeTasksCount }
           onDeleteTask={ this.onDeleteTask }
+          onUpdateTask={ this.onUpdateTask }
           onChangeClassname={ this.onChangeClassname }
           onTasksFilter={ this.onTasksFilter }
           onDeleteCompletedTasks = { this.onDeleteCompletedTasks }
