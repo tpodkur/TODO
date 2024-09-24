@@ -41,6 +41,7 @@ export default class App extends Component {
   };
 
   addTask = (text) => {
+    if (!text.length) return;
     const id = Math.random().toString(16).slice(2);
     const task = { id, description: text, created: new Date(Date.now()) };
 
@@ -65,7 +66,7 @@ export default class App extends Component {
       if (status === ALL) {
         filteredTasks = [ ...this.data ];
       } else if (status === ACTIVE) {
-        filteredTasks = this.data.filter((task) => !task.className);
+        filteredTasks = this.data.filter((task) => task.className !== 'completed');
       } else if (status === COMPLETED) {
         filteredTasks = this.data.filter((task) => task.className === 'completed');
       }
