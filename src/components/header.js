@@ -8,7 +8,7 @@ export default class Header extends Component {
 
   state = {
     inputValue: ''
-  }
+  };
 
   onChange = (event) => {
     this.setState({ inputValue: event.target.value });
@@ -36,4 +36,4 @@ export default class Header extends Component {
       </header>
     );
   }
-}
+};

@@ -18,7 +18,7 @@ export default class App extends Component {
 
   getTaskIndexById = (arr, id) => {
     return arr.findIndex((task) => task.id === id);
-  }
+  };
 
   onDeleteTask = (id) => {
     const dataIndex = this.getTaskIndexById(this.data, id);
@@ -28,7 +28,7 @@ export default class App extends Component {
       ({ tasks: [ ...this.data ] }),
       this.onTasksFilter
     );
-  }
+  };
 
   onChangeClassname = (id, className) => {
     const dataIndex = this.getTaskIndexById(this.data, id);
@@ -84,7 +84,7 @@ export default class App extends Component {
       ({ tasks: [ ...this.data ] }),
       this.onTasksFilter
     );
-  }
+  };
 
   render() {
     const activeTasksCount = this.data.reduce((acc, task) => {
@@ -108,4 +108,4 @@ export default class App extends Component {
       </section>
     );
   }
-}
+};
