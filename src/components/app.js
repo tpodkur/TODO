@@ -10,6 +10,7 @@ export default class App extends Component {
     { id: '2', description: 'Editing task', created: 'created 5 minutes ago', className: 'editing' },
     { id: '3', description: 'Active task', created: 'created 5 minutes ago' }
   ];
+  filterStatus = ALL;
 
   state = {
     tasks: [ ...this.data ]
@@ -48,6 +49,10 @@ export default class App extends Component {
           ...tasks.slice(index + 1)
         ]
       };
+    }, () => {
+      if (this.filterStatus !== ALL) {
+        this.onTasksFilter();
+      }
     });
   };
 
@@ -64,7 +69,7 @@ export default class App extends Component {
     }));
   };
 
-  onTasksFilter = (status) => {
+  onTasksFilter = (status = this.filterStatus) => {
     this.setState(({ tasks }) => {
       let filteredTasks;
 
@@ -76,6 +81,7 @@ export default class App extends Component {
         filteredTasks = this.data.filter((task) => task.className === 'completed');
       }
 
+      this.filterStatus = status;
       return {
         tasks: filteredTasks ? filteredTasks : tasks
       }
