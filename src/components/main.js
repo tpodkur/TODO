@@ -21,17 +21,8 @@ const Main = ({
   );
 };
 
-Main.defaultProps = {
-  tasks: [],
-  activeTasksCount: 0,
-  onDeleteTask: () => {},
-  onChangeClassname: () => {},
-  onTasksFilter: () => {},
-  onDeleteCompletedTasks: () => {}
-};
-
 Main.propTypes = {
-  tasks: PropTypes.array,
+  tasks: PropTypes.arrayOf(PropTypes.object),
   activeTasksCount: PropTypes.number,
   onDeleteTask: PropTypes.func,
   onChangeClassname: PropTypes.func,

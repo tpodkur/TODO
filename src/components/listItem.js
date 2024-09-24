@@ -10,19 +10,10 @@ const ListItem = (props) => {
   );
 };
 
-ListItem.defaultProps = {
-  id: '',
-  description: '',
-  created: '',
-  className: '',
-  onDeleteTask: () => {},
-  onChangeClassname: () => {}
-};
-
 ListItem.propTypes = {
   id: PropTypes.string,
   description: PropTypes.string,
-  created: PropTypes.string,
+  created: PropTypes.instanceOf(Date),
   className: PropTypes.string,
   onDeleteTask: PropTypes.func,
   onChangeClassname: PropTypes.func

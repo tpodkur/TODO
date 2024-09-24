@@ -17,12 +17,6 @@ const Footer = ({ activeTasksCount, onTasksFilter, onDeleteCompletedTasks }) => 
   );
 };
 
-Footer.defaultProps = {
-  activeTasksCount: 0,
-  onTasksFilter: () => {},
-  onDeleteCompletedTasks: () => {}
-};
-
 Footer.propTypes = {
   activeTasksCount: PropTypes.number,
   onTasksFilter: PropTypes.func,

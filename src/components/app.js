@@ -6,9 +6,9 @@ import { ALL, ACTIVE, COMPLETED } from './constants';
 export default class App extends Component {
 
   data = [
-    { id: '1', description: 'Completed task', created: 'created 17 seconds ago', className: 'completed' },
-    { id: '2', description: 'Editing task', created: 'created 5 minutes ago', className: 'editing' },
-    { id: '3', description: 'Active task', created: 'created 5 minutes ago' }
+    { id: '1', description: 'Completed task', created: new Date('2024-01-01'), className: 'completed' },
+    { id: '2', description: 'Editing task', created: new Date('2024-09-24'), className: 'editing' },
+    { id: '3', description: 'Active task', created: new Date('2024-09-20') }
   ];
   filterStatus = ALL;
 
@@ -42,7 +42,7 @@ export default class App extends Component {
 
   addTask = (text) => {
     const id = Math.random().toString(16).slice(2);
-    const task = { id, description: text, created: 'created 5 minutes ago' };
+    const task = { id, description: text, created: new Date(Date.now()) };
 
     this.data.push(task);
     this.setState(({ tasks: [ ...this.data ] }));

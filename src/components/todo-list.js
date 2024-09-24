@@ -11,7 +11,7 @@ export default class TodoList extends Component {
   };
 
   static propTypes = {
-    tasks: PropTypes.array,
+    tasks: PropTypes.arrayOf(PropTypes.object),
     onDeleteTask: PropTypes.func,
     onChangeClassname: PropTypes.func
   };
