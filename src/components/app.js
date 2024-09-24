@@ -45,10 +45,22 @@ export default class App extends Component {
     });
   };
 
+  addTask = (text) => {
+    const id = Math.random().toString(16).slice(2);
+    const task = { id, description: text, created: 'created 5 minutes ago' };
+
+    this.setState(({ tasks }) => ({
+      tasks: [
+        ...tasks,
+        task
+      ]
+    }));
+  };
+
   render() {
     return (
       <section className="todoapp">
-        <Header />
+        <Header addTask={ this.addTask } />
         <Main
           tasks={ this.state.tasks }
           onDeleteTask={ this.onDeleteTask }
