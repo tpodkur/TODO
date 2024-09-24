@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ListItem from './listItem';
+import PropTypes from 'prop-types';
 
 export default class TodoList extends Component {
 
@@ -7,6 +8,12 @@ export default class TodoList extends Component {
     tasks: [],
     onDeleteTask: () => {},
     onChangeClassname: () => {}
+  };
+
+  static propTypes = {
+    tasks: PropTypes.array,
+    onDeleteTask: PropTypes.func,
+    onChangeClassname: PropTypes.func
   };
 
   render() {

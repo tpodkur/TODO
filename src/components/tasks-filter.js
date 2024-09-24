@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { ALL, ACTIVE, COMPLETED } from './constants';
+import PropTypes from 'prop-types';
 
 export default class TasksFilter extends Component {
 
   static defaultProps = {
     onTasksFilter: () => {}
+  };
+
+  static propTypes = {
+    onTasksFilter: PropTypes.func
   };
 
   state = {

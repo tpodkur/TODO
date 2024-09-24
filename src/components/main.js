@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from './todo-list';
 import Footer from './footer';
+import PropTypes from 'prop-types';
 
 const Main = ({
                 activeTasksCount,
@@ -27,6 +28,15 @@ Main.defaultProps = {
   onChangeClassname: () => {},
   onTasksFilter: () => {},
   onDeleteCompletedTasks: () => {}
+};
+
+Main.propTypes = {
+  tasks: PropTypes.array,
+  activeTasksCount: PropTypes.number,
+  onDeleteTask: PropTypes.func,
+  onChangeClassname: PropTypes.func,
+  onTasksFilter: PropTypes.func,
+  onDeleteCompletedTasks: PropTypes.func
 };
 
 export default Main;

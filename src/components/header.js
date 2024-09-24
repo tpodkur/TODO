@@ -1,9 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Header extends Component {
 
   static defaultProps = {
     addTask: () => {}
+  };
+
+  static propTypes = {
+    addTask: PropTypes.func
   };
 
   state = {

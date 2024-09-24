@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Task extends Component {
 
@@ -9,6 +10,15 @@ export default class Task extends Component {
     className: '',
     onDeleteTask: () => {},
     onChangeClassname: () => {}
+  };
+
+  static propTypes = {
+    id: PropTypes.string,
+    description: PropTypes.string,
+    created: PropTypes.string,
+    className: PropTypes.string,
+    onDeleteTask: PropTypes.func,
+    onChangeClassname: PropTypes.func
   };
 
   toggleClassName = (event) => {
