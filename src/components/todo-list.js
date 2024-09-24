@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import Task from './task';
+import ListItem from './listItem';
 
 export default class TodoList extends Component {
-  listItems = this.props.todos.map(item => <Task { ...item } key={ item.id } />)
 
   render() {
+    const listItems = this.props.tasks.map(task =>
+      <ListItem
+        { ...task }
+        key={ task.id }
+        onDeleteTask={ () => this.props.onDeleteTask(task.id) }
+      />
+    );
+
     return (
       <ul className='todo-list'>
-        { this.listItems }
+        { listItems }
       </ul>
     );
   }
