@@ -87,11 +87,19 @@ export default class App extends Component {
   }
 
   render() {
+    const activeTasksCount = this.data.reduce((acc, task) => {
+      if (task.className !== 'completed') {
+        acc++;
+      }
+      return acc;
+    }, 0);
+
     return (
       <section className="todoapp">
         <Header addTask={ this.addTask } />
         <Main
           tasks={ this.state.tasks }
+          activeTasksCount={ activeTasksCount }
           onDeleteTask={ this.onDeleteTask }
           onChangeClassname={ this.onChangeClassname }
           onTasksFilter={ this.onTasksFilter }
