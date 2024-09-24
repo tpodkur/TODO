@@ -7,8 +7,8 @@ export default class ListItem extends React.Component {
     className: this.props.className
   }
 
-  onChangeClassname = (className) => {
-    this.setState({ className });
+  onChangeClassname = (event) => {
+    this.setState({ className: event.target.checked ? 'completed' : '' });
   };
 
   render() {
@@ -16,6 +16,7 @@ export default class ListItem extends React.Component {
       <li className={ this.state.className }>
         <Task
           { ...this.props }
+          className={ this.state.className }
           onChangeClassname = { this.onChangeClassname }
         />
       </li>

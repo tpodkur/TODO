@@ -1,20 +1,6 @@
 import React, { Component } from 'react';
 
 export default class Task extends Component {
-
-  state = {
-    id: this.props.id,
-    description: this.props.description,
-    created: this.props.created,
-    className: this.props.className
-  }
-
-  toggleTaskClass = (event) => {
-    const newClassName = event.target.checked ? 'completed' : '';
-    this.setState({ className: newClassName });
-    this.props.onChangeClassname(newClassName);
-  }
-
   render() {
     return (
     <React.Fragment>
@@ -22,17 +8,17 @@ export default class Task extends Component {
         <input
           className="toggle"
           type="checkbox"
-          onChange={ this.toggleTaskClass }
-          checked={ this.state.className === 'completed' }
+          onChange={ this.props.onChangeClassname }
+          checked={ this.props.className === 'completed' }
         />
         <label>
-          <span className="description">{ this.state.description }</span>
-          <span className="created">{ this.state.created }</span>
+          <span className="description">{ this.props.description }</span>
+          <span className="created">{ this.props.created }</span>
         </label>
         <button className="icon icon-edit"></button>
         <button className="icon icon-destroy" onClick={ this.props.onDeleteTask }></button>
       </div>
-      { this.state.className === 'editing' && <input type='text' className='edit' defaultValue='Editing task'/> }
+      { this.props.className === 'editing' && <input type='text' className='edit' defaultValue='Editing task'/> }
     </React.Fragment>
     );
   }
