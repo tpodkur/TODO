@@ -20,4 +20,13 @@ const Main = ({
   );
 };
 
+Main.defaultProps = {
+  tasks: [],
+  activeTasksCount: 0,
+  onDeleteTask: () => {},
+  onChangeClassname: () => {},
+  onTasksFilter: () => {},
+  onDeleteCompletedTasks: () => {}
+};
+
 export default Main;

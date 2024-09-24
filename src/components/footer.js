@@ -16,4 +16,10 @@ const Footer = ({ activeTasksCount, onTasksFilter, onDeleteCompletedTasks }) => 
   );
 };
 
+Footer.defaultProps = {
+  activeTasksCount: 0,
+  onTasksFilter: () => {},
+  onDeleteCompletedTasks: () => {}
+};
+
 export default Footer;

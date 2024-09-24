@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 
 export default class Task extends Component {
 
+  static defaultProps = {
+    id: '',
+    description: '',
+    created: '',
+    className: '',
+    onDeleteTask: () => {},
+    onChangeClassname: () => {}
+  };
+
   toggleClassName = (event) => {
     this.props.onChangeClassname(this.props.id, event.target.checked ? 'completed' : '')
   };

@@ -3,6 +3,12 @@ import ListItem from './listItem';
 
 export default class TodoList extends Component {
 
+  static defaultProps = {
+    tasks: [],
+    onDeleteTask: () => {},
+    onChangeClassname: () => {}
+  };
+
   render() {
     const listItems = this.props.tasks.map(task =>
       <ListItem

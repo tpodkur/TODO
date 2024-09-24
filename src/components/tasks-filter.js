@@ -3,6 +3,10 @@ import { ALL, ACTIVE, COMPLETED } from './constants';
 
 export default class TasksFilter extends Component {
 
+  static defaultProps = {
+    onTasksFilter: () => {}
+  };
+
   state = {
     [ALL]: true,
     [ACTIVE]: false,
