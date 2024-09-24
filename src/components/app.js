@@ -11,8 +11,12 @@ export default class App extends Component {
     ]
   };
 
+  getTaskIndexById = (id) => {
+    return this.state.tasks.findIndex((task) => task.id === id);
+  }
+
   onDeleteTask = (id) => {
-    const index = this.state.tasks.findIndex((task) => task.id === id);
+    const index = this.getTaskIndexById(id);
     if (index < 0) return;
 
     this.setState( ({ tasks }) => ({
@@ -23,11 +27,33 @@ export default class App extends Component {
     }));
   }
 
+  onChangeClassname = (id, className) => {
+    const index = this.getTaskIndexById(id);
+    if (index < 0) return;
+
+    this.setState(({ tasks }) => {
+      const oldTask = tasks[index];
+      const newTask = { ...oldTask, className };
+
+      return {
+        tasks: [
+          ...tasks.slice(0, index),
+          newTask,
+          ...tasks.slice(index + 1)
+        ]
+      };
+    });
+  };
+
   render() {
     return (
       <section className="todoapp">
         <Header />
-        <Main tasks={ this.state.tasks } onDeleteTask={ this.onDeleteTask } />
+        <Main
+          tasks={ this.state.tasks }
+          onDeleteTask={ this.onDeleteTask }
+          onChangeClassname={ this.onChangeClassname }
+        />
       </section>
     );
   }

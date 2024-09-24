@@ -9,6 +9,7 @@ export default class TodoList extends Component {
         { ...task }
         key={ task.id }
         onDeleteTask={ () => this.props.onDeleteTask(task.id) }
+        onChangeClassname={ this.props.onChangeClassname }
       />
     );
 
