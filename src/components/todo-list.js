@@ -1,38 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ListItem from './listItem';
 import PropTypes from 'prop-types';
 
-export default class TodoList extends Component {
+const TodoList = ({ tasks, onDeleteTask, onUpdateTask, onChangeClassname }) => {
+  const listItems = tasks.map(task =>
+    <ListItem
+      { ...task }
+      key={ task.id }
+      onDeleteTask={ () => onDeleteTask(task.id) }
+      onUpdateTask={ onUpdateTask }
+      onChangeClassname={ onChangeClassname }
+    />
+  );
 
-  static defaultProps = {
-    tasks: [],
-    onDeleteTask: () => {},
-    onUpdateTask: () => {},
-    onChangeClassname: () => {}
-  };
-
-  static propTypes = {
-    tasks: PropTypes.arrayOf(PropTypes.object),
-    onDeleteTask: PropTypes.func,
-    onUpdateTask: PropTypes.func,
-    onChangeClassname: PropTypes.func
-  };
-
-  render() {
-    const listItems = this.props.tasks.map(task =>
-      <ListItem
-        { ...task }
-        key={ task.id }
-        onDeleteTask={ () => this.props.onDeleteTask(task.id) }
-        onUpdateTask={ this.props.onUpdateTask }
-        onChangeClassname={ this.props.onChangeClassname }
-      />
-    );
-
-    return (
-      <ul className='todo-list'>
-        { listItems }
-      </ul>
-    );
-  }
+  return (
+    <ul className='todo-list'>
+      { listItems }
+    </ul>
+  );
 };
+
+TodoList.propTypes = {
+  tasks: PropTypes.arrayOf(PropTypes.object),
+  onDeleteTask: PropTypes.func,
+  onUpdateTask: PropTypes.func,
+  onChangeClassname: PropTypes.func
+};
+
+export default TodoList;
