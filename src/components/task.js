@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { formatDistanceToNow } from 'date-fns'
+import { formatDistanceToNow } from 'date-fns';
 
 export default class Task extends Component {
-
   static defaultProps = {
     id: '',
     description: '',
@@ -11,7 +10,7 @@ export default class Task extends Component {
     className: '',
     onDeleteTask: () => {},
     onUpdateTask: () => {},
-    onChangeClassname: () => {}
+    onChangeClassname: () => {},
   };
 
   static propTypes = {
@@ -21,15 +20,15 @@ export default class Task extends Component {
     className: PropTypes.string,
     onDeleteTask: PropTypes.func,
     onUpdateTask: PropTypes.func,
-    onChangeClassname: PropTypes.func
+    onChangeClassname: PropTypes.func,
   };
 
   state = {
-    inputValue: this.props.description
+    inputValue: this.props.description,
   };
 
   onToggleCompleteCheckbox = (event) => {
-    this.props.onChangeClassname(this.props.id, event.target.checked ? 'completed' : '')
+    this.props.onChangeClassname(this.props.id, event.target.checked ? 'completed' : '');
   };
 
   onEditTask = () => {
@@ -54,27 +53,22 @@ export default class Task extends Component {
           <input
             className="toggle"
             type="checkbox"
-            onChange={ this.onToggleCompleteCheckbox }
-            checked={ this.props.className === 'completed' }
+            onChange={this.onToggleCompleteCheckbox}
+            checked={this.props.className === 'completed'}
           />
           <label>
-            <span className="description">{ this.props.description }</span>
-            <span className="created">{ formatDistanceToNow(this.props.created) }</span>
+            <span className="description">{this.props.description}</span>
+            <span className="created">{formatDistanceToNow(this.props.created)}</span>
           </label>
-          <button className="icon icon-edit" onClick={ this.onEditTask }></button>
-          <button className="icon icon-destroy" onClick={ this.props.onDeleteTask }></button>
+          <button className="icon icon-edit" onClick={this.onEditTask}></button>
+          <button className="icon icon-destroy" onClick={this.props.onDeleteTask}></button>
         </div>
-        { this.props.className === 'editing' &&
-          <form onSubmit={ this.onSubmit }>
-            <input
-              type='text'
-              className='edit'
-              value={ this.state.inputValue }
-              onChange={ this.onChange }
-            />
+        {this.props.className === 'editing' && (
+          <form onSubmit={this.onSubmit}>
+            <input type="text" className="edit" value={this.state.inputValue} onChange={this.onChange} />
           </form>
-        }
+        )}
       </React.Fragment>
     );
   }
-};
+}

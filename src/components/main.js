@@ -1,21 +1,17 @@
 import React from 'react';
-import TodoList from './todo-list';
-import Footer from './footer';
 import PropTypes from 'prop-types';
 
-const Main = ({
-                activeTasksCount,
-                onTasksFilter,
-                onDeleteCompletedTasks,
-                ...props
-}) => {
+import TodoList from './todo-list';
+import Footer from './footer';
+
+const Main = ({ activeTasksCount, onTasksFilter, onDeleteCompletedTasks, ...props }) => {
   return (
     <section className="main">
-      <TodoList { ...props } />
+      <TodoList {...props} />
       <Footer
-        activeTasksCount={ activeTasksCount }
-        onTasksFilter={ onTasksFilter }
-        onDeleteCompletedTasks = { onDeleteCompletedTasks }
+        activeTasksCount={activeTasksCount}
+        onTasksFilter={onTasksFilter}
+        onDeleteCompletedTasks={onDeleteCompletedTasks}
       />
     </section>
   );
@@ -28,7 +24,7 @@ Main.propTypes = {
   onChangeClassname: PropTypes.func,
   onTasksFilter: PropTypes.func,
   onDeleteCompletedTasks: PropTypes.func,
-  onUpdateTask: PropTypes.func
+  onUpdateTask: PropTypes.func,
 };
 
 export default Main;

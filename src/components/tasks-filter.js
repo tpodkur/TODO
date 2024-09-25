@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
-import { ALL, ACTIVE, COMPLETED } from './constants';
 import PropTypes from 'prop-types';
 
-export default class TasksFilter extends Component {
+import { ALL, ACTIVE, COMPLETED } from './constants';
 
+export default class TasksFilter extends Component {
   static defaultProps = {
-    onTasksFilter: () => {}
+    onTasksFilter: () => {},
   };
 
   static propTypes = {
-    onTasksFilter: PropTypes.func
+    onTasksFilter: PropTypes.func,
   };
 
   state = {
     [ALL]: true,
     [ACTIVE]: false,
-    [COMPLETED]: false
+    [COMPLETED]: false,
   };
 
   onTasksFilter = (event) => {
     const filterObject = {
       [ALL]: false,
       [ACTIVE]: false,
-      [COMPLETED]: false
+      [COMPLETED]: false,
     };
     const filter = event.target.dataset.filter;
     this.setState({ ...filterObject, [filter]: true });
@@ -32,17 +32,23 @@ export default class TasksFilter extends Component {
 
   render() {
     return (
-      <ul className="filters" onClick={ this.onTasksFilter }>
+      <ul className="filters" onClick={this.onTasksFilter}>
         <li>
-          <button className={this.state[ALL] ? "selected" : ""} data-filter={ ALL }>All</button>
+          <button className={this.state[ALL] ? 'selected' : ''} data-filter={ALL}>
+            All
+          </button>
         </li>
         <li>
-          <button className={this.state[ACTIVE] ? "selected" : ""} data-filter={ ACTIVE }>Active</button>
+          <button className={this.state[ACTIVE] ? 'selected' : ''} data-filter={ACTIVE}>
+            Active
+          </button>
         </li>
         <li>
-          <button className={this.state[COMPLETED] ? "selected" : ""} data-filter={ COMPLETED }>Completed</button>
+          <button className={this.state[COMPLETED] ? 'selected' : ''} data-filter={COMPLETED}>
+            Completed
+          </button>
         </li>
       </ul>
     );
   }
-};
+}

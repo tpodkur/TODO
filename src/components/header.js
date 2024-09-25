@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Header extends Component {
-
   static defaultProps = {
-    addTask: () => {}
+    addTask: () => {},
   };
 
   static propTypes = {
-    addTask: PropTypes.func
+    addTask: PropTypes.func,
   };
 
   state = {
-    inputValue: ''
+    inputValue: '',
   };
 
   onChange = (event) => {
@@ -29,16 +28,16 @@ export default class Header extends Component {
     return (
       <header className="header">
         <h1>todos</h1>
-        <form onSubmit={ this.onSubmit }>
+        <form onSubmit={this.onSubmit}>
           <input
             className="new-todo"
             placeholder="What needs to be done?"
             autoFocus
-            onChange={ this.onChange }
-            value={ this.state.inputValue }
+            onChange={this.onChange}
+            value={this.state.inputValue}
           />
         </form>
       </header>
     );
   }
-};
+}

@@ -1,11 +1,12 @@
 import React from 'react';
-import Task from './task';
 import PropTypes from 'prop-types';
+
+import Task from './task';
 
 const ListItem = (props) => {
   return (
-    <li className={ props.className }>
-      <Task { ...props } />
+    <li className={props.className}>
+      <Task {...props} />
     </li>
   );
 };
@@ -17,7 +18,7 @@ ListItem.propTypes = {
   className: PropTypes.string,
   onDeleteTask: PropTypes.func,
   onUpdateTask: PropTypes.func,
-  onChangeClassname: PropTypes.func
+  onChangeClassname: PropTypes.func,
 };
 
 export default ListItem;

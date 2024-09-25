@@ -11,12 +11,19 @@
     "plugin:import/errors",
     "plugin:import/warnings"
   ],
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
     "ecmaVersion": 12,
-    "sourceType": "module"
+    "sourceType": "module",
+    "requireConfigFile": false,
+    "babelOptions": {
+      "parserOpts": {
+        "plugins": ["jsx"]
+      }
+    }
   },
   "plugins": ["react", "prettier", "import"],
   "rules": {
@@ -24,7 +31,6 @@
     "prettier/prettier": "error",
     "linebreak-style": [0, "unix"],
     "quotes": ["error", "single"],
-    "semi": ["error", "never"],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": 0,
     "import/no-unresolved": [2, { "caseSensitive": false }],
