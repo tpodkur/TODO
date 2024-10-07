@@ -6,9 +6,26 @@ import { ALL, ACTIVE, COMPLETED } from './constants';
 
 export default class App extends Component {
   data = [
-    { id: '1', description: 'Completed task', created: new Date('2024-01-01'), className: 'completed' },
-    { id: '2', description: 'Editing task', created: new Date('2024-09-24'), className: 'editing' },
-    { id: '3', description: 'Active task', created: new Date('2024-09-20') },
+    {
+      id: '1',
+      description: 'Completed task',
+      created: new Date('2024-01-01'),
+      timer: { min: 12, sec: 32 },
+      className: 'completed',
+    },
+    {
+      id: '2',
+      description: 'Editing task',
+      created: new Date('2024-09-24'),
+      timer: { min: 8, sec: 0 },
+      className: 'editing',
+    },
+    {
+      id: '3',
+      description: 'Active task',
+      created: new Date('2024-09-20'),
+      timer: { min: 50, sec: 10 },
+    },
   ];
   filterStatus = ALL;
 
@@ -34,10 +51,10 @@ export default class App extends Component {
     this.setState({ tasks: [...this.data] }, this.onTasksFilter);
   };
 
-  addTask = (text) => {
+  addTask = (text, min, sec) => {
     if (!text.length) return;
     const id = Math.random().toString(16).slice(2);
-    const task = { id, description: text, created: new Date(Date.now()) };
+    const task = { id, description: text, created: new Date(Date.now()), timer: { min, sec } };
 
     this.data.push(task);
     this.setState({ tasks: [...this.data] });
@@ -46,6 +63,14 @@ export default class App extends Component {
   onUpdateTask = (id, text) => {
     const dataIndex = this.getTaskIndexById(this.data, id);
     this.data[dataIndex].description = text;
+
+    this.setState({ tasks: [...this.data] }, this.onTasksFilter);
+  };
+
+  onUpdateTaskTimer = (id, min, sec) => {
+    const dataIndex = this.getTaskIndexById(this.data, id);
+    this.data[dataIndex].timer.min = min;
+    this.data[dataIndex].timer.sec = sec;
 
     this.setState({ tasks: [...this.data] }, this.onTasksFilter);
   };
@@ -101,6 +126,7 @@ export default class App extends Component {
           activeTasksCount={activeTasksCount}
           onDeleteTask={this.onDeleteTask}
           onUpdateTask={this.onUpdateTask}
+          onUpdateTaskTimer={this.onUpdateTaskTimer}
           onChangeClassname={this.onChangeClassname}
           onTasksFilter={this.onTasksFilter}
           onDeleteCompletedTasks={this.onDeleteCompletedTasks}

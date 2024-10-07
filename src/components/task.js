@@ -8,8 +8,10 @@ export default class Task extends Component {
     description: '',
     created: '',
     className: '',
+    timer: { min: 0, sec: 0 },
     onDeleteTask: () => {},
     onUpdateTask: () => {},
+    onUpdateTaskTimer: () => {},
     onChangeClassname: () => {},
   };
 
@@ -18,14 +20,21 @@ export default class Task extends Component {
     description: PropTypes.string,
     created: PropTypes.instanceOf(Date),
     className: PropTypes.string,
+    timer: PropTypes.object,
     onDeleteTask: PropTypes.func,
     onUpdateTask: PropTypes.func,
+    onUpdateTaskTimer: PropTypes.func,
     onChangeClassname: PropTypes.func,
   };
 
   state = {
     inputValue: this.props.description,
+    min: this.props.timer.min,
+    sec: this.props.timer.sec,
   };
+
+  minIntervalId;
+  secIntervalId;
 
   onToggleCompleteCheckbox = (event) => {
     this.props.onChangeClassname(this.props.id, event.target.checked ? 'completed' : '');
@@ -46,6 +55,41 @@ export default class Task extends Component {
     this.setState({ inputValue: event.target.value });
   };
 
+  onPlayTimer = () => {
+    this.secIntervalId = setInterval(() => {
+      this.setState((prevState) => {
+        if (prevState.sec === 0 && prevState.min === 0) {
+          clearInterval(this.secIntervalId);
+          clearInterval(this.minIntervalId);
+          return { min: 0, sec: 0 };
+        }
+
+        if (prevState.sec === 0) {
+          return { min: prevState.min - 1, sec: 59 };
+        }
+
+        return {
+          sec: prevState.sec - 1,
+        };
+      });
+    }, 1000);
+  };
+
+  onStopTimer = () => {
+    clearInterval(this.minIntervalId);
+    clearInterval(this.secIntervalId);
+    this.props.onUpdateTaskTimer(this.props.id, this.state.min, this.state.sec);
+  };
+
+  renderTime = (value) => {
+    return value < 10 ? '0' + value : value;
+  };
+
+  componentWillUnmount() {
+    clearInterval(this.minIntervalId);
+    clearInterval(this.secIntervalId);
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -59,9 +103,9 @@ export default class Task extends Component {
           <label>
             <span className="title">{this.props.description}</span>
             <span className="description">
-              <button className="icon icon-play"></button>
-              <button className="icon icon-pause"></button>
-              12:25
+              <button className="icon icon-play" onClick={this.onPlayTimer}></button>
+              <button className="icon icon-pause" onClick={this.onStopTimer}></button>
+              {this.renderTime(this.state.min)}:{this.renderTime(this.state.sec)}
             </span>
             <span className="description">{formatDistanceToNow(this.props.created)}</span>
           </label>

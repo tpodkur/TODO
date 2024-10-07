@@ -30,7 +30,7 @@ export default class Header extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.addTask(event.target.querySelector('.new-todo').value);
+    this.props.addTask(event.target.querySelector('.new-todo').value, this.state.min, this.state.sec);
     this.setState({ inputValue: '', min: '', sec: '' });
   };
 
