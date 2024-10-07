@@ -12,30 +12,57 @@ export default class Header extends Component {
 
   state = {
     inputValue: '',
+    min: '',
+    sec: '',
   };
 
   onChange = (event) => {
     this.setState({ inputValue: event.target.value });
   };
 
+  onChangeMin = (event) => {
+    this.setState({ min: event.target.value });
+  };
+
+  onChangeSec = (event) => {
+    this.setState({ sec: event.target.value });
+  };
+
   onSubmit = (event) => {
     event.preventDefault();
     this.props.addTask(event.target.querySelector('.new-todo').value);
-    this.setState({ inputValue: '' });
+    this.setState({ inputValue: '', min: '', sec: '' });
   };
 
   render() {
     return (
       <header className="header">
         <h1>todos</h1>
-        <form onSubmit={this.onSubmit}>
+        <form className="new-todo-form" onSubmit={this.onSubmit}>
           <input
             className="new-todo"
-            placeholder="What needs to be done?"
+            placeholder="Task"
             autoFocus
             onChange={this.onChange}
             value={this.state.inputValue}
           />
+          <input
+            className="new-todo-form__timer"
+            placeholder="Min"
+            autoFocus
+            onChange={this.onChangeMin}
+            value={this.state.min}
+          />
+          <input
+            className="new-todo-form__timer"
+            placeholder="Sec"
+            autoFocus
+            onChange={this.onChangeSec}
+            value={this.state.sec}
+          />
+          <button className="new-todo-form__submit" type="submit">
+            add
+          </button>
         </form>
       </header>
     );

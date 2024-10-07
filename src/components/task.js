@@ -57,8 +57,13 @@ export default class Task extends Component {
             checked={this.props.className === 'completed'}
           />
           <label>
-            <span className="description">{this.props.description}</span>
-            <span className="created">{formatDistanceToNow(this.props.created)}</span>
+            <span className="title">{this.props.description}</span>
+            <span className="description">
+              <button className="icon icon-play"></button>
+              <button className="icon icon-pause"></button>
+              12:25
+            </span>
+            <span className="description">{formatDistanceToNow(this.props.created)}</span>
           </label>
           <button className="icon icon-edit" onClick={this.onEditTask}></button>
           <button className="icon icon-destroy" onClick={this.props.onDeleteTask}></button>
