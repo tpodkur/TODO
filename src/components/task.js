@@ -11,8 +11,9 @@ export default class Task extends Component {
     timer: { min: 0, sec: 0 },
     onDeleteTask: () => {},
     onUpdateTask: () => {},
-    onUpdateTaskTimer: () => {},
     onChangeClassname: () => {},
+    onPlayTimer: () => {},
+    onStopTimer: () => {},
   };
 
   static propTypes = {
@@ -23,17 +24,14 @@ export default class Task extends Component {
     timer: PropTypes.object,
     onDeleteTask: PropTypes.func,
     onUpdateTask: PropTypes.func,
-    onUpdateTaskTimer: PropTypes.func,
     onChangeClassname: PropTypes.func,
+    onPlayTimer: PropTypes.func,
+    onStopTimer: PropTypes.func,
   };
 
   state = {
     inputValue: this.props.description,
-    min: this.props.timer.min,
-    sec: this.props.timer.sec,
   };
-
-  intervalId;
 
   onToggleCompleteCheckbox = (event) => {
     this.props.onChangeClassname(this.props.id, event.target.checked ? 'completed' : '');
@@ -54,40 +52,9 @@ export default class Task extends Component {
     this.setState({ inputValue: event.target.value });
   };
 
-  onPlayTimer = () => {
-    if (this.intervalId) return;
-
-    this.intervalId = setInterval(() => {
-      this.setState((prevState) => {
-        if (prevState.sec === 0 && prevState.min === 0) {
-          clearInterval(this.intervalId);
-          return { min: 0, sec: 0 };
-        }
-
-        if (prevState.sec === 0) {
-          return { min: prevState.min - 1, sec: 59 };
-        }
-
-        return {
-          sec: prevState.sec - 1,
-        };
-      });
-    }, 1000);
-  };
-
-  onStopTimer = () => {
-    clearInterval(this.intervalId);
-    this.intervalId = null;
-    this.props.onUpdateTaskTimer(this.props.id, this.state.min, this.state.sec);
-  };
-
   renderTime = (value) => {
     return value < 10 ? '0' + value : value;
   };
-
-  componentWillUnmount() {
-    clearInterval(this.intervalId);
-  }
 
   render() {
     return (
@@ -102,9 +69,9 @@ export default class Task extends Component {
           <label>
             <span className="title">{this.props.description}</span>
             <span className="description">
-              <button className="icon icon-play" onClick={this.onPlayTimer}></button>
-              <button className="icon icon-pause" onClick={this.onStopTimer}></button>
-              {this.renderTime(this.state.min)}:{this.renderTime(this.state.sec)}
+              <button className="icon icon-play" onClick={() => this.props.onPlayTimer(this.props.id)}></button>
+              <button className="icon icon-pause" onClick={() => this.props.onStopTimer(this.props.id)}></button>
+              {this.renderTime(this.props.timer.min)}:{this.renderTime(this.props.timer.sec)}
             </span>
             <span className="description">{formatDistanceToNow(this.props.created)}</span>
           </label>

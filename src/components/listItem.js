@@ -19,6 +19,8 @@ ListItem.propTypes = {
   onDeleteTask: PropTypes.func,
   onUpdateTask: PropTypes.func,
   onChangeClassname: PropTypes.func,
+  onPlayTimer: PropTypes.func,
+  onStopTimer: PropTypes.func,
 };
 
 export default ListItem;

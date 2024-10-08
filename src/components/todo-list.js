@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 
 import ListItem from './listItem';
 
-const TodoList = ({ tasks, onDeleteTask, onUpdateTask, onUpdateTaskTimer, onChangeClassname }) => {
+const TodoList = ({ tasks, onDeleteTask, onUpdateTask, onChangeClassname, onPlayTimer, onStopTimer }) => {
   const listItems = tasks.map((task) => (
     <ListItem
       {...task}
       key={task.id}
       onDeleteTask={() => onDeleteTask(task.id)}
       onUpdateTask={onUpdateTask}
-      onUpdateTaskTimer={onUpdateTaskTimer}
       onChangeClassname={onChangeClassname}
+      onPlayTimer={onPlayTimer}
+      onStopTimer={onStopTimer}
     />
   ));
 
@@ -22,8 +23,9 @@ TodoList.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object),
   onDeleteTask: PropTypes.func,
   onUpdateTask: PropTypes.func,
-  onUpdateTaskTimer: PropTypes.func,
   onChangeClassname: PropTypes.func,
+  onPlayTimer: PropTypes.func,
+  onStopTimer: PropTypes.func,
 };
 
 export default TodoList;

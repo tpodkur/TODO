@@ -25,6 +25,8 @@ Main.propTypes = {
   onTasksFilter: PropTypes.func,
   onDeleteCompletedTasks: PropTypes.func,
   onUpdateTask: PropTypes.func,
+  onPlayTimer: PropTypes.func,
+  onStopTimer: PropTypes.func,
 };
 
 export default Main;
