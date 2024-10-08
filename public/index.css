@@ -438,6 +438,24 @@ html .clear-completed:active {
   text-decoration: underline;
 }
 
+.validation-popup {
+  position: absolute;
+  bottom: -90px;
+  padding: 10px;
+  border: 1px solid rgba(175, 47, 47, 0.35);
+  color: rgba(175, 47, 47, 0.65);
+}
+
+.validation-popup__message {
+  font-size: 20px;
+  margin: 0;
+}
+
+.timer-validation {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
 /*
 	Hack to remove background from Mobile Safari.
 	Can't use it globally since it destroys checkboxes in Firefox
