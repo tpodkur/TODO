@@ -55,6 +55,8 @@ export default class Task extends Component {
   };
 
   onPlayTimer = () => {
+    if (this.intervalId) return;
+
     this.intervalId = setInterval(() => {
       this.setState((prevState) => {
         if (prevState.sec === 0 && prevState.min === 0) {
@@ -75,6 +77,7 @@ export default class Task extends Component {
 
   onStopTimer = () => {
     clearInterval(this.intervalId);
+    this.intervalId = null;
     this.props.onUpdateTaskTimer(this.props.id, this.state.min, this.state.sec);
   };
 
