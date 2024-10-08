@@ -52,7 +52,7 @@ export default class App extends Component {
   };
 
   addTask = (text, min, sec) => {
-    if (!text.length) return;
+    if (!text.trim().length) return;
     const id = Math.random().toString(16).slice(2);
     const task = { id, description: text, created: new Date(Date.now()), timer: { min, sec } };
 

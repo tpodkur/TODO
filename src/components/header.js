@@ -34,7 +34,9 @@ export default class Header extends Component {
     event.preventDefault();
     if (!this.validateTimerFields(this.state.min, this.state.sec)) return;
 
-    this.props.addTask(event.target.querySelector('.new-todo').value, this.state.min, this.state.sec);
+    const min = this.state.min.length ? +this.state.min : 0;
+    const sec = this.state.sec.length ? +this.state.sec : 0;
+    this.props.addTask(event.target.querySelector('.new-todo').value, min, sec);
     this.setState({ inputValue: '', min: '', sec: '' });
   };
 
