@@ -33,8 +33,7 @@ export default class Task extends Component {
     sec: this.props.timer.sec,
   };
 
-  minIntervalId;
-  secIntervalId;
+  intervalId;
 
   onToggleCompleteCheckbox = (event) => {
     this.props.onChangeClassname(this.props.id, event.target.checked ? 'completed' : '');
@@ -56,11 +55,10 @@ export default class Task extends Component {
   };
 
   onPlayTimer = () => {
-    this.secIntervalId = setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.setState((prevState) => {
         if (prevState.sec === 0 && prevState.min === 0) {
-          clearInterval(this.secIntervalId);
-          clearInterval(this.minIntervalId);
+          clearInterval(this.intervalId);
           return { min: 0, sec: 0 };
         }
 
@@ -76,8 +74,7 @@ export default class Task extends Component {
   };
 
   onStopTimer = () => {
-    clearInterval(this.minIntervalId);
-    clearInterval(this.secIntervalId);
+    clearInterval(this.intervalId);
     this.props.onUpdateTaskTimer(this.props.id, this.state.min, this.state.sec);
   };
 
@@ -86,8 +83,7 @@ export default class Task extends Component {
   };
 
   componentWillUnmount() {
-    clearInterval(this.minIntervalId);
-    clearInterval(this.secIntervalId);
+    clearInterval(this.intervalId);
   }
 
   render() {
