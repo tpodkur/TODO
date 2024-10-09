@@ -49,6 +49,10 @@ export default class App extends Component {
     const dataIndex = this.getTaskIndexById(this.data, id);
     this.data[dataIndex].className = className;
 
+    if (className === 'completed') {
+      this.onStopTimer(id);
+    }
+
     this.setState({ tasks: [...this.data] }, this.onTasksFilter);
   };
 

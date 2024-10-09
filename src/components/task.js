@@ -69,7 +69,11 @@ export default class Task extends Component {
           <label>
             <span className="title">{this.props.description}</span>
             <span className="description">
-              <button className="icon icon-play" onClick={() => this.props.onPlayTimer(this.props.id)}></button>
+              <button
+                className="icon icon-play"
+                disabled={this.props.className === 'completed'}
+                onClick={() => this.props.onPlayTimer(this.props.id)}
+              ></button>
               <button className="icon icon-pause" onClick={() => this.props.onStopTimer(this.props.id)}></button>
               {this.renderTime(this.props.timer.min)}:{this.renderTime(this.props.timer.sec)}
             </span>
