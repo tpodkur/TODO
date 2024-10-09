@@ -39,6 +39,7 @@ export default class App extends Component {
 
   onDeleteTask = (id) => {
     const dataIndex = this.getTaskIndexById(this.data, id);
+    clearInterval(this.data[dataIndex].timer.id);
     this.data.splice(dataIndex, 1);
 
     this.setState({ tasks: [...this.data] }, this.onTasksFilter);
@@ -111,6 +112,7 @@ export default class App extends Component {
 
     for (let task of completedTasks) {
       const index = this.data.indexOf(task);
+      clearInterval(task.timer.id);
       this.data.splice(index, 1);
     }
 
@@ -118,12 +120,15 @@ export default class App extends Component {
   };
 
   onPlayTimer = (id) => {
-    const dataIndex = this.getTaskIndexById(this.data, id);
-    const task = this.data[dataIndex];
+    let dataIndex = this.getTaskIndexById(this.data, id);
+    let task = this.data[dataIndex];
     if (task.timer.isRun) return;
 
     this.data[dataIndex].timer.id = setInterval(() => {
+      dataIndex = this.getTaskIndexById(this.data, id);
+      task = this.data[dataIndex];
       const { min, sec } = task.timer;
+
       if (sec === 0 && min === 0) {
         clearInterval(task.timer.id);
         this.data[dataIndex].timer.min = 0;
