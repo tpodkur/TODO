@@ -58,7 +58,7 @@ export default class Header extends Component {
 
   isTimeValid = (value) => {
     if (value.length === 0) return true;
-    return +value > 0 && +value < 59;
+    return +value >= 0 && +value < 59;
   };
 
   render() {
