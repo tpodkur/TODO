@@ -15,6 +15,7 @@ ListItem.propTypes = {
   id: PropTypes.string,
   description: PropTypes.string,
   created: PropTypes.instanceOf(Date),
+  timer: PropTypes.object,
   className: PropTypes.string,
   onDeleteTask: PropTypes.func,
   onUpdateTask: PropTypes.func,

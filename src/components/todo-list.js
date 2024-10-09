@@ -3,17 +3,9 @@ import PropTypes from 'prop-types';
 
 import ListItem from './listItem';
 
-const TodoList = ({ tasks, onDeleteTask, onUpdateTask, onChangeClassname, onPlayTimer, onStopTimer }) => {
+const TodoList = ({ tasks, onDeleteTask, ...props }) => {
   const listItems = tasks.map((task) => (
-    <ListItem
-      {...task}
-      key={task.id}
-      onDeleteTask={() => onDeleteTask(task.id)}
-      onUpdateTask={onUpdateTask}
-      onChangeClassname={onChangeClassname}
-      onPlayTimer={onPlayTimer}
-      onStopTimer={onStopTimer}
-    />
+    <ListItem {...task} key={task.id} onDeleteTask={() => onDeleteTask(task.id)} {...props} />
   ));
 
   return <ul className="todo-list">{listItems}</ul>;
